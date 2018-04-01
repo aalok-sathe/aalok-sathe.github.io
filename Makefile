@@ -1,6 +1,14 @@
+#!/usr/bin/make -f
 
-aalok-cv.html: aalok-cv.bib Makefile
-	bibtex2html --nodoc --reverse-sort --revkeys --background f7e9cf --style acm aalok-cv.bib
+CMD     = bibtex2html
+HEAD    = cvheader.html
+FOOT    = cvfooter.html
+IN      = aalok-cv.bib
+OUT     = aalok-cv.html
+ARGS    = --nodoc --reverse-sort --revkeys --background "\"\#f7e9cf\"" --style acm $(IN)
 
-aalok-cv_bib.html: aalok-cv.bib Makefile
-	bibtex2html --nodoc --reverse-sort --revkeys --background f7e9cf --style acm aalok-cv.bib
+cvresume.html: $(HEAD) $(OUT) $(FOOT)
+	cat $^ > $@
+
+$(OUT): $(IN) Makefile
+	$(CMD) $(ARGS)

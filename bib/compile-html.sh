@@ -1,1 +1,1 @@
-bibtex2html --nodoc --style acm -i -r aalok-cv.bib
+bibtex2html --nodoc --reverse --revkeys --style acm aalok-cv.bib

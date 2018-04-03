@@ -12,10 +12,11 @@ VARS    = *.html
 
 all: index.html cvresume.html clean
 	
+	
 cvresume.html: $(HEAD) $(OUT) $(FOOT)
-	cat $^ > $@
 	$(LASTUP) $(FOOT)
-
+	cat $^ > $@
+	
 $(OUT): $(IN) Makefile
 	$(B2HCMD) $(ARGS)
 	

@@ -1,14 +1,28 @@
 #!/usr/bin/make -f
 
-CMD     = bibtex2html
+B2HCMD     = bibtex2html
 HEAD    = cvheader.html
 FOOT    = cvfooter.html
 IN      = aalok-cv.bib
 OUT     = aalok-cv.html
 ARGS    = --nodoc --revkeys --background "\"\#f7e9cf\"" --style acm $(IN)
+LASTUP  = sed -i -r "s/(Last modified: ).*/\1$(shell date)/g"
 
+VARS    = *.html
+
+all: index.html cvresume.html clean
+	
 cvresume.html: $(HEAD) $(OUT) $(FOOT)
 	cat $^ > $@
+	$(LASTUP) $(FOOT)
 
 $(OUT): $(IN) Makefile
-	$(CMD) $(ARGS)
+	$(B2HCMD) $(ARGS)
+	
+index.html: FORCE
+	$(LASTUP) $@
+
+FORCE: ;
+	
+clean:
+	rm -f *.bak *.aux *copy*
